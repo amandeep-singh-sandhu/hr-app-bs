@@ -1,0 +1,130 @@
+<div>
+    <%# Form %>
+    <%= form_with model: employee do |form|  %>
+        <!-- Showing all errors above the form -->
+        <% if @employee.errors.any? %>
+        <!-- <div class="row">
+            <div class="col-lg-12">
+                <h6>Please fix the following errors: </h6>
+                <ul class="bg-light py-2 ">
+                    <% @employee.errors.full_messages.each do |error| %>
+                    <li class="text-danger"><%= error %></li>
+                    <% end %>
+                </ul>
+            </div>
+        </div> -->
+        <% end %>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <%= form.label :first_name, class: 'mb-2' %>
+                    <%= form.text_field :first_name, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:first_name).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <%= form.label :middle_name, class: 'mb-2' %>
+                    <%= form.text_field :middle_name, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field
+                    <% @employee.errors.full_messages_for(:middle_name).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %> -->
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <%= form.label :last_name, class: 'mb-2' %>
+                    <%= form.text_field :last_name, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:last_name).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <%= form.label :personal_email, class: 'mb-2' %>
+                    <%= form.email_field :personal_email, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:personal_email).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <%= form.label :address_line_1, class: 'mb-2' %>
+                    <%= form.text_field :address_line_1, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:address_line_1).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <%= form.label :address_line_2, class: 'mb-2' %>
+                    <%= form.text_field :address_line_2, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <!-- <% @employee.errors.full_messages_for(:address_line_2).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %> -->
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <%= form.label :city, class: 'mb-2' %>
+                    <%= form.text_field :city, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:city).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <%= form.label :state, class: 'mb-2' %>
+                    <%= form.text_field :state, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:state).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <%= form.label :country, class: 'mb-2' %>
+                    <%= form.text_field :country, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:country).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="form-group">
+                    <%= form.label :pincode, class: 'mb-2' %>
+                    <%= form.text_field :pincode, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:pincode).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <%= form.submit class: 'btn btn-primary btn-lg' %>
+                <%= link_to 'Back to Employees', employees_path, class: 'btn btn-outline-primary btn-lg' %>
+            </div>
+        </div>
+    <% end %>
+</div>

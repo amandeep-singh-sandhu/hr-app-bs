@@ -1,0 +1,59 @@
+<div class="col-lg-12">
+	<h2 class="text-center mt-4 mb-4 font-weight-bold text-uppercase">Employee Information</h2>
+	<div class="row">
+		<div class="col-lg-6">
+			<h4 class=" mb-4">
+				<u>Personal details</u>
+			</h4>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>First Name: </strong>
+				<span><%= @employee.first_name %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Middle Name: </strong>
+				<span><%= @employee.middle_name.present? ? @employee.middle_name : 'N/A' %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Last Name: </strong>
+				<span><%= @employee.last_name %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Personal email: </strong>
+				<span><%= @employee.personal_email %></span>
+			</p>
+		</div>
+		<div class="col-lg-6">
+			<h4 class=" mb-4">
+				<u>Contact details</u>
+			</h4>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Address Line 1: </strong>
+				<span><%= @employee.address_line_1 %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Address Line 2: </strong>
+				<span><%= @employee.address_line_2.present? ? @employee.address_line_2 : 'N/A' %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>City: </strong>
+				<span><%= @employee.city %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>State: </strong>
+				<span><%= @employee.state %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Country: </strong>
+				<span><%= @employee.country %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Pincode: </strong>
+				<span><%= @employee.pincode %></span>
+			</p>
+		</div>
+		<div class="col-lg-12">
+			<%= link_to 'Back to employees', employees_path, class: "btn btn-outline-primary" %>
+			<%= link_to 'Edit employee', edit_employee_path(@employee), class: "btn btn-primary" %>
+		</div>
+	</div>
+</div>
