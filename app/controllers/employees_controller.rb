@@ -1,4 +1,6 @@
 class EmployeesController < ApplicationController
+	# Before Action filter
+	before_action :set_employee, only: [:edit, :update, :show, :destroy]
 	def index
 		@employees = Employee.all
 	end
@@ -20,11 +22,9 @@ class EmployeesController < ApplicationController
 	end
 
 	def edit
-		@employee = Employee.find(params[:id])
 	end
 
 	def update
-		@employee = Employee.find(params[:id])
 		if @employee.update(employee_params)
 			redirect_to employees_path, notice: 'Employee updated successfully...'
 		else
@@ -33,11 +33,9 @@ class EmployeesController < ApplicationController
 	end
 
 	def show
-		@employee = Employee.find(params[:id])
 	end
 
 	def destroy
-		@employee = Employee.find(params[:id])
 		if @employee.destroy
 			redirect_to employees_path, notice: 'Employed deleted successfully...'
 		end
@@ -51,4 +49,12 @@ class EmployeesController < ApplicationController
 		# Correct Way to permit params using strong parameters n not allowing any forbidden ones
 		params.require(:employee).permit(:first_name, :middle_name, :last_name, :personal_email, :city, :state, :country, :pincode, :address_line_1, :address_line_2)
 	end
+
+	def set_employee
+		@employee = Employee.find(params[:id])
+	# Handling Exception if any record is not found
+	rescue ActiveRecord::RecordNotFound => error
+		redirect_to employees_path, notice: error
+	end
+
 end

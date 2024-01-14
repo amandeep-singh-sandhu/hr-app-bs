@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   root 'home#index'
 
   resources :employees
+  resources :documents
 
   # public pages routes
   get 'about' => 'pages#about_us'

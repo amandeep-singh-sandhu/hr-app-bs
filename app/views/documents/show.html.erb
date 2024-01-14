@@ -1,0 +1,27 @@
+<div class="col-lg-12">
+	<h2 class="text-center mt-4 mb-4 font-weight-bold text-uppercase">Document Information</h2>
+	<div class="row">
+		<div class="col-lg-6">
+			<!-- Displaying image -->
+			<% if @document.image.attached? %>
+				<%= image_tag @document.image, class: 'img-fluid' %>
+			<% end %>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Name: </strong>
+				<span><%= @document.name %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Doc type: </strong>
+				<span><%= @document.doc_type %></span>
+			</p>
+			<p class="lead mb-1 " style="font-size: large;">
+				<strong>Employee: </strong>
+				<span><%= @document.employee.name %></span>
+			</p>
+		</div>
+		<div class="col-lg-12">
+			<%= link_to 'Back to documents', documents_path, class: "btn btn-outline-primary" %>
+			<%= link_to 'Edit document', edit_document_path(@document), class: "btn btn-primary" %>
+		</div>
+	</div>
+</div>
