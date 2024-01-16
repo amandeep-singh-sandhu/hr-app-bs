@@ -6,47 +6,205 @@
 		Employees List
 	</h2>
 	<%# Link to new employee template %>
-	<div>
+	<div class="col-lg-6 mb-4">
 		<%= link_to 'Create New Employee', new_employee_path, class: 'btn
-		btn-primary btn-lg mb-4' %>
+		btn-primary btn-lg' %>
+		<div class="dropdown d-inline-block ms-2">
+			<button
+				class="btn btn-primary btn-lg dropdown-toggle"
+				type="button"
+				data-bs-toggle="dropdown"
+				aria-expanded="false"
+			>
+				View List in
+			</button>
+			<ul class="dropdown-menu">
+				<li>
+					<%= link_to 'Table', employees_path(view_type: 'table'), class:
+					'dropdown-item' %>
+				</li>
+				<li>
+					<%= link_to 'Accordion', employees_path(view_type: 'accordion'),
+					class: 'dropdown-item' %>
+				</li>
+			</ul>
+		</div>
 	</div>
-	<table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>Name</th>
-				<th>Email</th>
-				<th>Address</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			<% @employees.each do |employee| %>
-			<tr>
-				<td><%= employee.name %></td>
-				<td><%= employee.personal_email %></td>
-				<td><%= employee.full_address %></td>
-				<td>
-					<div class="dropdown">
-						<a class="btn btn-primary btn-lg dropdown-toggle" href="#" id="navbarDropdown" role="button"
-							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Actions
-						</a>
-						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<%= link_to 'Edit', edit_employee_path(employee), class: 'dropdown-item' %>
-							<%= link_to 'View', employee_path(employee), class: 'dropdown-item' %>
-							<%= link_to 'Delete', employee_path(employee), class: 'dropdown-item', method: :delete, data: { confirm: 'Are you sure?' } %>
+	<!-- Table View -->
+	<% if params[:view_type] != 'accordion' %>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Email</th>
+					<th>Address</th>
+					<th>Actions</th>
+				</tr>
+			</thead>
+			<tbody>
+				<% @employees.each do |employee| %>
+				<tr>
+					<td><%= employee.name %></td>
+					<td><%= employee.personal_email %></td>
+					<td><%= employee.full_address %></td>
+					<td>
+						<div class="dropdown">
+							<button
+								class="btn btn-primary dropdown-toggle"
+								type="button"
+								data-bs-toggle="dropdown"
+								aria-expanded="false"
+							>
+								Actions
+							</button>
+							<ul class="dropdown-menu">
+								<li>
+									<%= link_to 'Edit', edit_employee_path(employee), class:
+									'dropdown-item' %>
+								</li>
+								<li>
+									<%= link_to 'View', employee_path(employee), class:
+									'dropdown-item' %>
+								</li>
+								<li>
+									<%= link_to 'Delete', employee_path(employee), class:
+									'dropdown-item', method: :delete, data: { confirm: 'Are you
+									sure?' } %>
+								</li>
+							</ul>
+						</div>
+
+						<!-- <%= link_to 'Edit', edit_employee_path(employee), class: 'btn btn-primary' %> -->
+						<!-- <%= link_to 'View', employee_path(employee), class: 'btn btn-info' %> -->
+						<!-- To make delete action work, 
+						1. need to run './bin/importmap pin rails-ujs' command in the terminal
+						2. import the package in application.js "import Rails from 'rails-ujs'" and "Rails.start()"  
+						<%= link_to 'Delete', employee_path(employee), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %> 
+					-->
+					</td>
+				</tr>
+				<% end %>
+			</tbody>
+		</table>
+	<% end %>
+	<!-- Bootstrap Accordion View -->
+	<% if params[:view_type].present? && params[:view_type] == 'accordion' %>
+		<div class="accordion" id="accordionExample">
+			<% @employees.each_with_index do |employee, index| %>
+			<div class="accordion-item">
+				<h2 class="accordion-header" id="heading_<%= index + 1 %>">
+					<button
+						class="accordion-button fs-5"
+						type="button"
+						data-bs-toggle="collapse"
+						data-bs-target="#collapse_<%= index + 1 %>"
+						aria-expanded="true"
+						aria-controls="collapse_<%= index + 1 %>"
+					>
+						<%= employee.name_with_email %>
+					</button>
+				</h2>
+				<div
+					id="collapse_<%= index + 1 %>"
+					class="accordion-collapse collapse"
+					aria-labelledby="heading_<%= index + 1 %>"
+					data-bs-parent="#accordionExample"
+				>
+					<div class="accordion-body">
+						<div class="col-lg-12">
+							<h2 class="text-center mt-4 mb-4 font-weight-bold text-uppercase">
+								Employee Information
+							</h2>
+							<div class="row">
+								<div class="col-lg-6">
+									<h4 class="mb-2">
+										<u>Personal details</u>
+									</h4>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>First Name: </strong>
+										<span><%= employee.first_name %></span>
+									</p>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>Middle Name: </strong>
+										<span
+											><%= employee.middle_name.present? ? employee.middle_name :
+											'N/A' %></span
+										>
+									</p>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>Last Name: </strong>
+										<span><%= employee.last_name %></span>
+									</p>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>Personal email: </strong>
+										<span><%= employee.personal_email %></span>
+									</p>
+								</div>
+								<div class="col-lg-6">
+									<h4 class="mb-2">
+										<u>Contact details</u>
+									</h4>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>Address Line 1: </strong>
+										<span><%= employee.address_line_1 %></span>
+									</p>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>Address Line 2: </strong>
+										<span
+											><%= employee.address_line_2.present? ?
+											employee.address_line_2 : 'N/A' %></span
+										>
+									</p>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>City: </strong>
+										<span><%= employee.city %></span>
+									</p>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>State: </strong>
+										<span><%= employee.state %></span>
+									</p>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>Country: </strong>
+										<span><%= employee.country %></span>
+									</p>
+									<p class="lead mb-1" style="font-size: large">
+										<strong>Pincode: </strong>
+										<span><%= employee.pincode %></span>
+									</p>
+								</div>
+								<% if employee.documents.present? %>
+								<div class="col-lg-12 mt-3">
+									<h2 class="text-center font-weight-bold">Employee Documents</h2>
+									<% employee.documents.each do |document| %>
+									<div class="card">
+										<div class="card-body">
+											<div class="row">
+												<% if document.image.attached? %>
+												<div class="col-lg-4 mb-2">
+													<%= image_tag document.image, class: 'img-fluid' %>
+												</div>
+												<% end %>
+												<div class="col-lg-4">
+													<%= document.name %> | <%= document.doc_type %>
+												</div>
+											</div>
+										</div>
+									</div>
+									<% end %>
+								</div>
+								<% end %>
+								<div class="col-lg-12 mt-4">
+									<%= link_to 'Edit', edit_employee_path(employee), class: 'btn
+									btn-primary' %> <%= link_to 'Delete', employee_path(employee),
+									class: 'btn btn-danger', method: :delete, data: { confirm: 'Are
+									you sure?' } %>
+								</div>
+							</div>
 						</div>
 					</div>
-					<!-- <%= link_to 'Edit', edit_employee_path(employee), class: 'btn btn-primary' %>
-				<%= link_to 'View', employee_path(employee), class: 'btn btn-info' %>
-				<!-- To make delete action work, 
-					1. need to run './bin/importmap pin rails-ujs' command in the terminal
-					2. import the package in application.js "import Rails from 'rails-ujs'" and "Rails.start()"  
-					<%= link_to 'Delete', employee_path(employee), class: 'btn btn-danger', method: :delete, data: { confirm: 'Are you sure?' } %> 
-				-->
-				</td>
-			</tr>
+				</div>
+			</div>
 			<% end %>
-		</tbody>
-	</table>
+		</div>
+	<% end %>
 </div>

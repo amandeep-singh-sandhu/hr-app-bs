@@ -2,21 +2,21 @@
 <%= form_with model: document do |form| %>
     <div class="row">
         <div class="col-lg-4">
-            <div class="form-group">
+            <div class="form-group mb-3 ">
                 <%= form.label :name, class: 'mb-2' %>
                 <%= form.text_field :name, class: 'form-control form-control-lg' %>
                 <% document.errors.full_messages_for(:name).each do |error| %>
                     <p class="text-danger small"><%= error %></p>
                 <% end %>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3 ">
                 <%= form.label :doc_type, class: 'mb-2' %>
                 <%= form.select :doc_type, options_for_select(Document::DOC_TYPES, selected: document.doc_type), {prompt: 'Select document type'}, class: 'form-control form-control-lg ' %>
                 <% document.errors.full_messages_for(:doc_type).each do |error| %>
                     <p class="text-danger small"><%= error %></p>
                 <% end %>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3 ">
                 <%= form.label :employee_id, class: 'mb-2' %>
                 <%= form.select :employee_id, options_for_select(Employee.all.map{|employee| [employee.name_with_email, employee.id]}, selected: document.employee_id), {prompt: 'Select employee'}, class: 'form-control form-control-lg ' %>
                 <!-- Showing all employees using pluck method and passing attributes -->
@@ -25,7 +25,7 @@
                     <p class="text-danger small"><%= error %></p>
                 <% end %>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3 ">
                 <%= form.label :image, class: 'mb-2' %><br />
                 <%= form.file_field :image %>
             </div>
