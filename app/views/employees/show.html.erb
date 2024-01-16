@@ -2,7 +2,7 @@
 	<h2 class="text-center mt-4 mb-4 font-weight-bold text-uppercase">Employee Information</h2>
 	<div class="row">
 		<div class="col-lg-6">
-			<h4 class=" mb-4">
+			<h4 class=" mb-2">
 				<u>Personal details</u>
 			</h4>
 			<p class="lead mb-1 " style="font-size: large;">
@@ -23,7 +23,7 @@
 			</p>
 		</div>
 		<div class="col-lg-6">
-			<h4 class=" mb-4">
+			<h4 class=" mb-2">
 				<u>Contact details</u>
 			</h4>
 			<p class="lead mb-1 " style="font-size: large;">
@@ -52,8 +52,8 @@
 			</p>
 		</div>
 		<% if @employee.documents.present? %>
-			<div class="col-lg-12">
-				<h2 class="text-center">Employee Documents</h2>
+			<div class="col-lg-12 mt-3 ">
+				<h2 class="text-center font-weight-bold">Employee Documents</h2>
 				<% @employee.documents.each do |document| %>
 					<div class="card">
 						<div class="card-body">
@@ -72,9 +72,9 @@
 				<% end %>
 			</div>
 		<% end %>
-		<div class="col-lg-12">
-			<%= link_to 'Back to employees', employees_path, class: "btn btn-outline-primary" %>
-			<%= link_to 'Edit employee', edit_employee_path(@employee), class: "btn btn-primary" %>
+		<div class="col-lg-12 mt-4 ">
+			<%= link_to 'Back to employees', employees_path, class: "btn btn-outline-primary btn-lg" %>
+			<%= link_to 'Edit employee', edit_employee_path(@employee), class: "btn btn-primary btn-lg" %>
 		</div>
 	</div>
 </div>

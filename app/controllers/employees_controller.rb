@@ -47,7 +47,7 @@ class EmployeesController < ApplicationController
 		# Syntax to permit all the params but its not good practice to do it cos if you a customised input then you would get and error
 		# params.require(:employee).permit!
 		# Correct Way to permit params using strong parameters n not allowing any forbidden ones
-		params.require(:employee).permit(:first_name, :middle_name, :last_name, :personal_email, :city, :state, :country, :pincode, :address_line_1, :address_line_2)
+		params.require(:employee).permit(:first_name, :middle_name, :last_name, :date_of_birth, :date_of_joining, :job_title, :personal_email, :about, :city, :state, :country, :pincode, :address_line_1, :address_line_2)
 	end
 
 	def set_employee

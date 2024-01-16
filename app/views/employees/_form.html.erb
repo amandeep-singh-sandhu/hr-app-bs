@@ -45,14 +45,52 @@
                     <% end %>
                 </div>
             </div>
-        </div>
-        <div class="row">
             <div class="col-lg-4">
+                <div class="form-group">
+                    <%= form.label :date_of_birth, class: 'mb-2' %>
+                    <%= form.date_field :date_of_birth, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:date_of_birth).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <%= form.label :date_of_joining, class: 'mb-2' %>
+                    <%= form.date_field :date_of_joining, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:date_of_joining).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="form-group">
+                    <%= form.label :job_title, class: 'mb-2' %>
+                    <%= form.text_field :job_title, class: 'form-control form-control-lg' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:job_title).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-12">
                 <div class="form-group">
                     <%= form.label :personal_email, class: 'mb-2' %>
                     <%= form.email_field :personal_email, class: 'form-control form-control-lg' %>
                     <!-- Showing error below the field -->
                     <% @employee.errors.full_messages_for(:personal_email).each do |error| %>
+                    <p class="text-danger small"><%= error %></p>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="form-group">
+                    <%= form.label :about, class: 'mb-2' %>
+                    <%= form.text_area :about, class: 'form-control form-control-lg', rows: '5', style: 'resize: none' %>
+                    <!-- Showing error below the field -->
+                    <% @employee.errors.full_messages_for(:about).each do |error| %>
                     <p class="text-danger small"><%= error %></p>
                     <% end %>
                 </div>
