@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  devise_for :users
+  # devise_for :users
   get 'up' => 'rails/health#show', as: :rails_health_check
   # Ways to define a route
   # get 'home/index'
@@ -11,6 +11,12 @@ Rails.application.routes.draw do
 
   resources :employees
   resources :documents
+
+  devise_for :users
+
+  devise_scope :user do
+    get '/users/sign_out' => 'devise/sessions#destroy'
+  end
 
   # public pages routes
   get 'about' => 'pages#about_us'
